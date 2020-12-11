@@ -1,13 +1,55 @@
+@import url('https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@300&display=swap');
+
+* {
+  font-family: 'M PLUS 1p', sans-serif !important;
+}
+
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  margin: 0 !important;
+  background-color: #fce4ec;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+
+.price-color {
+  color: red !important;
+  font-size: 1.5em !important;
+}
+
+.scroll {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  overflow-x: scroll;
+  margin-bottom: 15px;
+}
+
+.MuiChip-root {
+  margin: 0px 3px !important;
+  background-color: rgb(222,194,224) !important;
+}
+
+.spaced-field {
+  margin: 10px 0 !important;
+}
+
+a {
+  text-decoration: none !important;
+}
+
+.MuiTypography-h5{
+  font-size: 1.1em !important;
+}
+
+.MuiGrid-spacing-xs-2 {
+  width: 100% !important;
+  margin: 0 !important;
+}
+
+.MuiButton-containedPrimary {
+  color: white !important;
 }
