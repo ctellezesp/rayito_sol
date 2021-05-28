@@ -53,3 +53,8 @@ a {
 .MuiButton-containedPrimary {
   color: white !important;
 }
+
+.MuiAvatar-root {
+  height: 60px !important;
+  width: 60px !important;
+}

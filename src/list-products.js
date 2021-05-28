@@ -15,6 +15,8 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import AddIcon from '@material-ui/icons/Add';
 import Chip from '@material-ui/core/Chip';
+import Avatar from '@material-ui/core/Avatar';
+import TextField from '@material-ui/core/TextField';
 import Menu from './menu';
 import {Planets} from 'react-preloaders';
 import firebase from "./firebase/config";
@@ -34,8 +36,9 @@ export default class ListProducts extends Component {
     }
 
     componentDidMount() {
-        firebase.db.collection("items").orderBy("name", "asc").get()
+        firebase.db.collection("items").orderBy("active", "desc").get()
         .then(res => {
+            console.log('products: ', res.docs[0].data());
             this.setState({
                 products: res.docs,
                 rendering: res.docs,
@@ -54,7 +57,7 @@ export default class ListProducts extends Component {
     }
 
     fetchData() {
-        firebase.db.collection("items").orderBy("name", "asc").get()
+        firebase.db.collection("items").orderBy("active", "desc").get()
         .then(res => {
             this.setState({
                 products: res.docs,
@@ -135,6 +138,15 @@ export default class ListProducts extends Component {
 
     }
 
+    search = (event) => {
+        console.log(event.target.value);
+        const filtered = this.state.products.filter(prod => prod.data().name.toLowerCase().includes(event.target.value.toLowerCase()));
+        console.log(filtered);
+        this.setState({
+            rendering: filtered
+        });
+    }
+
     render() {
         return(
             <div className="main">
@@ -160,11 +172,15 @@ export default class ListProducts extends Component {
                                     })}
                                 </div>
                             </Grid>
+                            <Grid item xs={12} style={{backgroundColor: 'white', margin: '10px 0'}}>
+                                <TextField fullWidth id="outlined-basic" label="Buscar producto..." variant="outlined" onChange={this.search} />
+                            </Grid>
                             <Grid item xs={12}>
                                 <TableContainer component={Paper}>
                                     <Table aria-label="simple table">
                                         <TableHead>
                                         <TableRow>
+                                            <TableCell>Imagen</TableCell>
                                             <TableCell>Producto</TableCell>
                                             <TableCell align="right">Disponible</TableCell>
                                             <TableCell align="right">Editar</TableCell>
@@ -174,6 +190,7 @@ export default class ListProducts extends Component {
                                         <TableBody>
                                         {this.state.rendering.map((product, index) => (
                                             <TableRow key={index}>
+                                                <TableCell><Avatar alt={product.data().name} src={product.data().img} /></TableCell>
                                                 <TableCell component="th" scope="row">
                                                     {product.data().name}
                                                 </TableCell>
